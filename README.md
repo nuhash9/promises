@@ -15,6 +15,6 @@ yarn dev
 ```
 ## Live Preview
 See what it looks like:
-promises.nuhash.me
+https://promises.nuhash.me
 
 Changes deployed as development progresses.
