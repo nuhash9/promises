@@ -14,16 +14,16 @@ export default function PromiseList({ promises, users, currentUserId, title, emp
 
   if (promises.length === 0) {
     return (
-      <div className="text-center py-8 text-gray-500">
-        <p>{emptyMessage}</p>
+      <div className="text-center py-12 border border-dashed border-stone-200 bg-stone-50">
+        <p className="text-stone-400 font-serif italic">{emptyMessage}</p>
       </div>
     );
   }
 
   return (
     <div>
-      {title && <h2 className="text-xl font-serif font-bold text-gray-900 mb-4">{title}</h2>}
-      <div className="space-y-4">
+      {title && <h2 className="text-xl font-serif font-bold text-stone-900 mb-6 border-b border-stone-200 pb-2">{title}</h2>}
+      <div className="space-y-6">
         {promises.map(promise => (
           <PromiseCard
             key={promise.id}

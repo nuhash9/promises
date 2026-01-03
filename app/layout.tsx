@@ -14,13 +14,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="min-h-screen bg-gradient-to-b from-amber-50 to-orange-50">
+      <body className="min-h-screen bg-stone-50 text-stone-900">
         <Header />
-        <main className="max-w-screen-md mx-auto px-4 py-8">
+        <main className="max-w-screen-md mx-auto px-6 py-12">
           {children}
         </main>
-        <footer className="border-t border-amber-200 mt-16 py-8 text-center text-sm text-gray-500">
-          <p>Keep your promises. Build trust. ✨</p>
+        <footer className="border-t border-stone-200 mt-20 py-10 text-center text-xs text-stone-500 uppercase tracking-widest">
+          <p>Promises &bull; Integrity Protocol</p>
         </footer>
       </body>
     </html>

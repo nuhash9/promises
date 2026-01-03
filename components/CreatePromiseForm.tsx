@@ -71,19 +71,19 @@ export default function CreatePromiseForm({ users, currentUser }: CreatePromiseF
   };
 
   return (
-    <form onSubmit={handleSubmit} className="bg-white rounded-xl shadow-lg border border-amber-100 p-6">
-      <h2 className="text-xl font-serif font-bold text-gray-900 mb-4">Make a Promise</h2>
+    <form onSubmit={handleSubmit} className="bg-white border border-stone-200 p-8">
+      <h2 className="text-2xl font-serif font-bold text-stone-900 mb-6">Make a Promise</h2>
       
       {error && (
-        <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg text-red-700 text-sm">
+        <div className="mb-6 p-4 bg-red-50 border border-red-200 text-red-700 text-sm">
           {error}
         </div>
       )}
 
-      <div className="space-y-4">
+      <div className="space-y-6">
         {/* User Search */}
         <div className="relative">
-          <label className="block text-sm font-medium text-gray-700 mb-1">
+          <label className="block text-xs font-semibold text-stone-500 uppercase tracking-wide mb-2">
             Promise to
           </label>
           <input
@@ -96,41 +96,41 @@ export default function CreatePromiseForm({ users, currentUser }: CreatePromiseF
             }}
             onFocus={() => setShowResults(true)}
             placeholder="Search for a user..."
-            className="w-full px-4 py-2 border border-amber-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-300 focus:border-transparent"
+            className="w-full px-4 py-3 border border-stone-200 focus:outline-none focus:border-stone-500 focus:ring-1 focus:ring-stone-500 transition bg-stone-50"
           />
           
           {showResults && searchTerm && filteredUsers.length > 0 && (
-            <div className="absolute z-10 w-full mt-1 bg-white border border-gray-200 rounded-lg shadow-lg max-h-48 overflow-auto">
+            <div className="absolute z-10 w-full mt-1 bg-white border border-stone-200 shadow-lg max-h-48 overflow-auto">
               {filteredUsers.map(user => (
                 <button
                   key={user.id}
                   type="button"
                   onClick={() => handleUserSelect(user.id, user.username)}
-                  className="w-full px-4 py-2 text-left hover:bg-amber-50 flex justify-between items-center"
+                  className="w-full px-4 py-3 text-left hover:bg-stone-50 flex justify-between items-center border-b border-stone-100 last:border-0"
                 >
-                  <span className="font-medium">@{user.username}</span>
-                  <span className="text-sm text-gray-500">✨ {user.vows} vows</span>
+                  <span className="font-medium text-stone-900">@{user.username}</span>
+                  <span className="text-xs text-stone-500 uppercase tracking-wide">{user.vows} vows</span>
                 </button>
               ))}
             </div>
           )}
 
           {showResults && searchTerm && filteredUsers.length === 0 && (
-            <div className="absolute z-10 w-full mt-1 bg-white border border-gray-200 rounded-lg shadow-lg p-3 text-gray-500 text-sm">
+            <div className="absolute z-10 w-full mt-1 bg-white border border-stone-200 shadow-lg p-4 text-stone-500 text-sm">
               No users found
             </div>
           )}
 
           {selectedUserObj && (
-            <p className="mt-1 text-sm text-green-600">
-              ✓ Selected: @{selectedUserObj.username}
+            <p className="mt-2 text-sm text-stone-600 flex items-center gap-1">
+              <span className="text-green-600">✓</span> Selected: @{selectedUserObj.username}
             </p>
           )}
         </div>
 
         {/* Promise Description */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
+          <label className="block text-xs font-semibold text-stone-500 uppercase tracking-wide mb-2">
             I promise that...
           </label>
           <textarea
@@ -138,23 +138,23 @@ export default function CreatePromiseForm({ users, currentUser }: CreatePromiseF
             onChange={(e) => setDescription(e.target.value)}
             placeholder="What are you promising?"
             rows={3}
-            className="w-full px-4 py-2 border border-amber-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-300 focus:border-transparent resize-none"
+            className="w-full px-4 py-3 border border-stone-200 focus:outline-none focus:border-stone-500 focus:ring-1 focus:ring-stone-500 transition bg-stone-50 resize-none font-serif text-lg"
           />
         </div>
 
         {/* Stake */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
+          <label className="block text-xs font-semibold text-stone-500 uppercase tracking-wide mb-2">
             Stake (vows)
           </label>
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-4">
             <input
               type="range"
               min="1"
               max={Math.min(currentUser.vows, 50)}
               value={stake}
               onChange={(e) => setStake(Number(e.target.value))}
-              className="flex-1 h-2 bg-amber-200 rounded-lg appearance-none cursor-pointer"
+              className="flex-1 h-1 bg-stone-200 rounded-none appearance-none cursor-pointer"
             />
             <input
               type="number"
@@ -162,20 +162,26 @@ export default function CreatePromiseForm({ users, currentUser }: CreatePromiseF
               max={currentUser.vows}
               value={stake}
               onChange={(e) => setStake(Math.max(1, Math.min(currentUser.vows, Number(e.target.value))))}
-              className="w-20 px-3 py-1 border border-amber-200 rounded-lg text-center focus:outline-none focus:ring-2 focus:ring-amber-300"
+              className="w-24 px-3 py-2 border border-stone-200 text-center focus:outline-none focus:border-stone-500 bg-stone-50 font-mono"
             />
           </div>
-          <p className="mt-1 text-sm text-gray-500">
+          <p className="mt-2 text-xs text-stone-500">
             Both you and @{selectedUserObj?.username || '...'} will stake {stake} vows each
           </p>
         </div>
 
         {/* Outcome Explanation */}
-        <div className="bg-amber-50 rounded-lg p-4 text-sm">
-          <p className="font-medium text-amber-800 mb-2">How it works:</p>
-          <ul className="space-y-1 text-amber-700">
-            <li>✅ <strong>Promise kept:</strong> Both get stake back + 50% bonus ({stake + Math.floor(stake * 0.5)} vows each)</li>
-            <li>💔 <strong>Promise broken:</strong> Promisee gets entire pot ({stake * 2} vows)</li>
+        <div className="bg-stone-50 border border-stone-100 p-5 text-sm">
+          <p className="font-semibold text-stone-900 mb-2 uppercase text-xs tracking-wide">Terms</p>
+          <ul className="space-y-2 text-stone-600">
+            <li className="flex items-start gap-2">
+              <span className="text-stone-400">•</span>
+              <span><strong>Kept:</strong> Both get stake back + 50% bonus ({stake + Math.floor(stake * 0.5)} vows each)</span>
+            </li>
+            <li className="flex items-start gap-2">
+              <span className="text-stone-400">•</span>
+              <span><strong>Broken:</strong> Promisee gets entire pot ({stake * 2} vows)</span>
+            </li>
           </ul>
         </div>
 
@@ -183,7 +189,7 @@ export default function CreatePromiseForm({ users, currentUser }: CreatePromiseF
         <button
           type="submit"
           disabled={isPending || currentUser.vows < stake}
-          className="w-full bg-gradient-to-r from-amber-500 to-orange-500 text-white py-3 rounded-lg font-medium hover:from-amber-600 hover:to-orange-600 transition disabled:opacity-50 disabled:cursor-not-allowed"
+          className="w-full bg-stone-900 text-white py-4 font-semibold uppercase tracking-wider hover:bg-stone-800 transition disabled:opacity-50 disabled:cursor-not-allowed text-sm"
         >
           {isPending ? 'Creating...' : `Create Promise (stake ${stake} vows)`}
         </button>

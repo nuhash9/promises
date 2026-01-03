@@ -55,25 +55,25 @@ export default function AuthForm({ existingUsers }: AuthFormProps) {
   };
 
   return (
-    <div className="bg-white rounded-xl shadow-lg border border-amber-100 p-8">
-      <h1 className="text-3xl font-serif font-bold text-center text-gray-900 mb-2">
+    <div className="bg-white border border-stone-200 p-10 max-w-md w-full mx-auto">
+      <h1 className="text-3xl font-serif font-bold text-center text-stone-900 mb-2">
         {isLogin ? 'Welcome Back' : 'Join Promises'}
       </h1>
-      <p className="text-center text-gray-500 mb-6">
+      <p className="text-center text-stone-500 mb-8 font-light">
         {isLogin 
           ? 'Sign in to manage your promises' 
           : 'Start with 100 vows to stake on promises'}
       </p>
 
       {error && (
-        <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg text-red-700 text-sm">
+        <div className="mb-6 p-4 bg-red-50 border border-red-200 text-red-700 text-sm">
           {error}
         </div>
       )}
 
-      <form onSubmit={handleSubmit} className="space-y-4">
+      <form onSubmit={handleSubmit} className="space-y-6">
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
+          <label className="block text-xs font-semibold text-stone-500 uppercase tracking-wide mb-2">
             Username
           </label>
           <input
@@ -82,7 +82,7 @@ export default function AuthForm({ existingUsers }: AuthFormProps) {
             onChange={(e) => setUsername(e.target.value.replace(/\s/g, ''))}
             placeholder="Enter username"
             disabled={isPending}
-            className="w-full px-4 py-3 border border-amber-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-300 focus:border-transparent disabled:opacity-50"
+            className="w-full px-4 py-3 border border-stone-200 focus:outline-none focus:border-stone-500 bg-stone-50 transition disabled:opacity-50"
             autoFocus
           />
         </div>
@@ -90,19 +90,19 @@ export default function AuthForm({ existingUsers }: AuthFormProps) {
         <button
           type="submit"
           disabled={isPending}
-          className="w-full bg-gradient-to-r from-amber-500 to-orange-500 text-white py-3 rounded-lg font-medium hover:from-amber-600 hover:to-orange-600 transition disabled:opacity-50"
+          className="w-full bg-stone-900 text-white py-4 font-semibold uppercase tracking-wider hover:bg-stone-800 transition disabled:opacity-50"
         >
           {isPending ? 'Please wait...' : (isLogin ? 'Sign In' : 'Create Account')}
         </button>
       </form>
 
-      <div className="mt-6 text-center">
+      <div className="mt-8 text-center">
         <button
           onClick={() => {
             setIsLogin(!isLogin);
             setError('');
           }}
-          className="text-amber-600 hover:text-amber-700 text-sm"
+          className="text-stone-500 hover:text-stone-800 text-sm border-b border-transparent hover:border-stone-400 transition pb-0.5"
         >
           {isLogin 
             ? "Don't have an account? Sign up" 
@@ -112,15 +112,15 @@ export default function AuthForm({ existingUsers }: AuthFormProps) {
 
       {/* Demo Users */}
       {isLogin && existingUsers.length > 0 && (
-        <div className="mt-8 pt-6 border-t border-gray-100">
-          <p className="text-sm text-gray-500 text-center mb-3">Quick sign in:</p>
+        <div className="mt-10 pt-8 border-t border-stone-100">
+          <p className="text-xs text-stone-400 text-center uppercase tracking-wide mb-4">Quick sign in:</p>
           <div className="flex flex-wrap gap-2 justify-center">
             {existingUsers.slice(0, 5).map(user => (
               <button
                 key={user.id}
                 onClick={() => handleQuickLogin(user)}
                 disabled={isPending}
-                className="px-3 py-1 bg-amber-50 text-amber-700 rounded-full text-sm hover:bg-amber-100 transition disabled:opacity-50"
+                className="px-3 py-1 bg-stone-50 border border-stone-200 text-stone-600 text-xs hover:bg-stone-100 hover:border-stone-300 transition disabled:opacity-50"
               >
                 @{user.username}
               </button>

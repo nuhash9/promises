@@ -9,41 +9,38 @@ export default async function Home() {
 
   if (!user) {
     return (
-      <div className="text-center py-16">
-        <h1 className="text-5xl font-serif font-bold text-gray-900 mb-4">
+      <div className="text-center py-20">
+        <h1 className="text-6xl font-serif font-bold text-stone-900 mb-6 tracking-tight">
           Promises
         </h1>
-        <p className="text-xl text-gray-600 mb-8 max-w-md mx-auto">
-          Make promises that matter. Stake your vows, build trust, and keep your word.
+        <p className="text-xl text-stone-600 mb-10 max-w-lg mx-auto font-light leading-relaxed">
+          The currency of trust. Stake vows on your word.
         </p>
         
         <Link
           href="/auth"
-          className="inline-block bg-gradient-to-r from-amber-500 to-orange-500 text-white px-8 py-4 rounded-xl font-medium text-lg hover:from-amber-600 hover:to-orange-600 transition shadow-lg"
+          className="inline-block bg-stone-900 text-white px-10 py-4 font-semibold uppercase tracking-widest hover:bg-stone-800 transition"
         >
           Get Started
         </Link>
 
-        <div className="mt-16 grid md:grid-cols-3 gap-6">
-          <div className="bg-white rounded-xl p-6 shadow-sm border border-amber-100">
-            <div className="text-3xl mb-3">🤝</div>
-            <h3 className="font-bold text-gray-900 mb-2">Make Promises</h3>
-            <p className="text-gray-600 text-sm">
-              Promise something to another user and stake vows to show you mean it.
+        <div className="mt-20 grid md:grid-cols-3 gap-px bg-stone-200 border border-stone-200">
+          <div className="bg-white p-10 text-center hover:bg-stone-50 transition">
+            <h3 className="font-serif font-bold text-stone-900 text-xl mb-3">Make Promises</h3>
+            <p className="text-stone-500 text-sm leading-relaxed">
+              Define your commitment. Stake your reputation.
             </p>
           </div>
-          <div className="bg-white rounded-xl p-6 shadow-sm border border-amber-100">
-            <div className="text-3xl mb-3">✨</div>
-            <h3 className="font-bold text-gray-900 mb-2">Stake Vows</h3>
-            <p className="text-gray-600 text-sm">
-              Both parties stake vows. Keep promises to earn bonus vows together.
+          <div className="bg-white p-10 text-center hover:bg-stone-50 transition">
+            <h3 className="font-serif font-bold text-stone-900 text-xl mb-3">Stake Vows</h3>
+            <p className="text-stone-500 text-sm leading-relaxed">
+              Put skin in the game. Mutual stakes ensure mutual respect.
             </p>
           </div>
-          <div className="bg-white rounded-xl p-6 shadow-sm border border-amber-100">
-            <div className="text-3xl mb-3">🏆</div>
-            <h3 className="font-bold text-gray-900 mb-2">Build Trust</h3>
-            <p className="text-gray-600 text-sm">
-              Your track record speaks for itself. Keep promises, grow your reputation.
+          <div className="bg-white p-10 text-center hover:bg-stone-50 transition">
+            <h3 className="font-serif font-bold text-stone-900 text-xl mb-3">Build Trust</h3>
+            <p className="text-stone-500 text-sm leading-relaxed">
+              A transparent record of your integrity.
             </p>
           </div>
         </div>
@@ -80,39 +77,36 @@ export default async function Home() {
   return (
     <>
       {/* Stats Bar */}
-      <div className="grid grid-cols-4 gap-4 mb-8">
-        <div className="bg-white rounded-xl p-4 shadow-sm border border-amber-100 text-center">
-          <p className="text-2xl font-bold text-amber-600">✨ {user.vows}</p>
-          <p className="text-sm text-gray-500">Vows</p>
+      <div className="grid grid-cols-4 border border-stone-200 bg-stone-200 gap-px mb-12">
+        <div className="bg-white p-6 text-center">
+          <p className="text-3xl font-serif font-bold text-stone-900">{user.vows}</p>
+          <p className="text-xs text-stone-500 uppercase tracking-widest mt-1">Vows</p>
         </div>
-        <div className="bg-white rounded-xl p-4 shadow-sm border border-amber-100 text-center">
-          <p className="text-2xl font-bold text-green-600">{kept}</p>
-          <p className="text-sm text-gray-500">Kept</p>
+        <div className="bg-white p-6 text-center">
+          <p className="text-3xl font-serif font-bold text-stone-900">{kept}</p>
+          <p className="text-xs text-stone-500 uppercase tracking-widest mt-1">Kept</p>
         </div>
-        <div className="bg-white rounded-xl p-4 shadow-sm border border-amber-100 text-center">
-          <p className="text-2xl font-bold text-red-600">{broken}</p>
-          <p className="text-sm text-gray-500">Broken</p>
+        <div className="bg-white p-6 text-center">
+          <p className="text-3xl font-serif font-bold text-stone-900">{broken}</p>
+          <p className="text-xs text-stone-500 uppercase tracking-widest mt-1">Broken</p>
         </div>
-        <div className="bg-white rounded-xl p-4 shadow-sm border border-amber-100 text-center">
-          <p className="text-2xl font-bold text-blue-600">{trustScore}%</p>
-          <p className="text-sm text-gray-500">Trust Score</p>
+        <div className="bg-white p-6 text-center">
+          <p className="text-3xl font-serif font-bold text-stone-900">{trustScore}%</p>
+          <p className="text-xs text-stone-500 uppercase tracking-widest mt-1">Trust Score</p>
         </div>
       </div>
 
       {/* Create Promise Form */}
-      <div className="mb-8">
+      <div className="mb-12">
         <CreatePromiseForm users={users} currentUser={user} />
       </div>
 
       {/* Incoming Promises (Need Action) */}
       {incoming.length > 0 && (
-        <div className="mb-8">
-          <div className="flex items-center gap-2 mb-4">
-            <span className="relative flex h-3 w-3">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-3 w-3 bg-amber-500"></span>
-            </span>
-            <h2 className="text-xl font-serif font-bold text-gray-900">Needs Your Response</h2>
+        <div className="mb-12">
+          <div className="flex items-center gap-3 mb-6">
+            <span className="h-2 w-2 rounded-full bg-stone-900"></span>
+            <h2 className="text-xl font-serif font-bold text-stone-900">Needs Response</h2>
           </div>
           <PromiseList
             promises={incoming}
@@ -126,36 +120,36 @@ export default async function Home() {
 
       {/* Outgoing Pending */}
       {outgoing.length > 0 && (
-        <div className="mb-8">
+        <div className="mb-12">
           <PromiseList
             promises={outgoing}
             users={users}
             currentUserId={user.id}
-            title="⏳ Awaiting Response"
+            title="Awaiting Response"
             emptyMessage=""
           />
         </div>
       )}
 
       {/* Active Promises */}
-      <div className="mb-8">
+      <div className="mb-12">
         <PromiseList
           promises={active}
           users={users}
           currentUserId={user.id}
-          title="🤝 Active Promises"
-          emptyMessage="No active promises right now"
+          title="Active Promises"
+          emptyMessage="No active promises."
         />
       </div>
 
       {/* History */}
       {history.length > 0 && (
-        <div className="mt-12 pt-8 border-t border-amber-200">
+        <div className="mt-16 pt-10 border-t border-stone-200">
           <PromiseList
             promises={history}
             users={users}
             currentUserId={user.id}
-            title="📜 History"
+            title="History"
             emptyMessage=""
           />
         </div>
