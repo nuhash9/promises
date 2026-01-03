@@ -25,24 +25,21 @@ export default async function Home() {
         </Link>
 
         <div className="mt-16 grid md:grid-cols-3 gap-6">
-          <div className="bg-white rounded-xl p-6 shadow-sm border border-amber-100">
-            <div className="text-3xl mb-3">🤝</div>
-            <h3 className="font-bold text-gray-900 mb-2">Make Promises</h3>
-            <p className="text-gray-600 text-sm">
+          <div className="bg-white p-6 border border-stone-200">
+            <h3 className="font-bold text-stone-900 mb-2">Make Promises</h3>
+            <p className="text-stone-600 text-sm">
               Promise something to another user and stake trust to show you mean it.
             </p>
           </div>
-          <div className="bg-white rounded-xl p-6 shadow-sm border border-amber-100">
-            <div className="text-3xl mb-3">✨</div>
-            <h3 className="font-bold text-gray-900 mb-2">Stake Trust</h3>
-            <p className="text-gray-600 text-sm">
+          <div className="bg-white p-6 border border-stone-200">
+            <h3 className="font-bold text-stone-900 mb-2">Stake Trust</h3>
+            <p className="text-stone-600 text-sm">
               Put your trust on the line. Keep promises to earn bonus trust together.
             </p>
           </div>
-          <div className="bg-white rounded-xl p-6 shadow-sm border border-amber-100">
-            <div className="text-3xl mb-3">📊</div>
-            <h3 className="font-bold text-gray-900 mb-2">Build Trust</h3>
-            <p className="text-gray-600 text-sm">
+          <div className="bg-white p-6 border border-stone-200">
+            <h3 className="font-bold text-stone-900 mb-2">Build Trust</h3>
+            <p className="text-stone-600 text-sm">
               A transparent record of your integrity.
             </p>
           </div>
@@ -81,19 +78,19 @@ export default async function Home() {
     <>
       {/* Stats Bar */}
       <div className="grid grid-cols-4 gap-4 mb-8">
-        <div className="bg-white rounded-xl p-4 shadow-sm border border-amber-100 text-center">
-          <p className="text-2xl font-bold text-amber-600">✨ {user.trust}</p>
-          <p className="text-sm text-gray-500">Trust</p>
+        <div className="bg-white p-6 text-center border border-stone-200">
+          <p className="text-3xl font-serif font-bold text-green-800">{user.trust}</p>
+          <p className="text-xs text-stone-500 uppercase tracking-widest mt-1">Trust</p>
         </div>
-        <div className="bg-white p-6 text-center">
+        <div className="bg-white p-6 text-center border border-stone-200">
           <p className="text-3xl font-serif font-bold text-green-800">{kept}</p>
           <p className="text-xs text-stone-500 uppercase tracking-widest mt-1">Kept</p>
         </div>
-        <div className="bg-white p-6 text-center">
+        <div className="bg-white p-6 text-center border border-stone-200">
           <p className="text-3xl font-serif font-bold text-green-800">{broken}</p>
           <p className="text-xs text-stone-500 uppercase tracking-widest mt-1">Broken</p>
         </div>
-        <div className="bg-white p-6 text-center">
+        <div className="bg-white p-6 text-center border border-stone-200">
           <p className="text-3xl font-serif font-bold text-green-800">{trustScore}%</p>
           <p className="text-xs text-stone-500 uppercase tracking-widest mt-1">Trust Score</p>
         </div>

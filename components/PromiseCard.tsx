@@ -99,14 +99,14 @@ export default function PromiseCard({ promise, promiser, promisee, currentUserId
       </p>
 
       {error && (
-        <div className="mb-3 p-2 bg-red-50 border border-red-200 rounded-lg text-red-700 text-sm">
+        <div className="mb-3 p-2 bg-red-50 border border-red-200 text-red-700 text-sm">
           {error}
         </div>
       )}
 
       <div className="flex justify-between items-center">
-        <div className="text-sm text-gray-500">
-          <span className="font-medium text-amber-600">✨ {promise.stake} trust</span> at stake
+        <div className="text-sm text-stone-500">
+          <span className="font-medium text-stone-700">{promise.stake} trust</span> at stake
         </div>
 
         <div className="flex gap-3">
@@ -153,7 +153,7 @@ export default function PromiseCard({ promise, promiser, promisee, currentUserId
             <button
               onClick={handleCancel}
               disabled={isPending}
-              className="bg-gray-200 text-gray-700 px-3 py-1.5 rounded-lg text-sm font-medium hover:bg-gray-300 transition disabled:opacity-50"
+              className="bg-white border border-stone-300 text-stone-600 px-4 py-2 text-xs uppercase tracking-wider font-semibold hover:bg-stone-50 transition disabled:opacity-50"
             >
               Cancel
             </button>
@@ -166,14 +166,14 @@ export default function PromiseCard({ promise, promiser, promisee, currentUserId
       </div>
 
       {promise.status === 'kept' && (
-        <div className="mt-3 text-sm text-green-600 bg-green-50 rounded-lg p-2">
-          🎉 {isPromiser ? 'You got your stake back + 50% bonus!' : 'You earned a 50% bonus for their kept promise!'}
+        <div className="mt-3 text-sm text-green-700 bg-green-50 border border-green-200 p-2">
+          {isPromiser ? 'You got your stake back + 50% bonus!' : 'You earned a 50% bonus for their kept promise!'}
         </div>
       )}
 
       {promise.status === 'broken' && (
-        <div className="mt-3 text-sm text-red-600 bg-red-50 rounded-lg p-2">
-          {isPromisee ? '💰 You received their stake!' : '😔 They received your stake.'}
+        <div className="mt-3 text-sm text-red-700 bg-red-50 border border-red-200 p-2">
+          {isPromisee ? 'You received their stake.' : 'They received your stake.'}
         </div>
       )}
     </div>

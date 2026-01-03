@@ -96,7 +96,7 @@ export default function CreatePromiseForm({ users, currentUser }: CreatePromiseF
             }}
             onFocus={() => setShowResults(true)}
             placeholder="Search for a user..."
-            className="w-full px-4 py-3 border-b-2 border-yellow-200 text-center focus:outline-none focus:border-yellow-400 transition bg-transparent"
+            className="w-full px-4 py-3 border border-stone-200 focus:outline-none focus:border-stone-400 transition bg-stone-50"
           />
           
           {showResults && searchTerm && filteredUsers.length > 0 && (
@@ -109,7 +109,7 @@ export default function CreatePromiseForm({ users, currentUser }: CreatePromiseF
                   className="w-full px-4 py-3 text-left hover:bg-stone-50 flex justify-between items-center border-b border-stone-100 last:border-0"
                 >
                   <span className="font-medium">@{user.username}</span>
-                  <span className="text-sm text-gray-500">✨ {user.trust} trust</span>
+                  <span className="text-sm text-stone-500">{user.trust} trust</span>
                 </button>
               ))}
             </div>
@@ -122,8 +122,8 @@ export default function CreatePromiseForm({ users, currentUser }: CreatePromiseF
           )}
 
           {selectedUserObj && (
-            <p className="mt-2 text-sm text-stone-600 flex items-center gap-1">
-              <span className="text-green-600">✓</span> Selected: @{selectedUserObj.username}
+            <p className="mt-2 text-sm text-green-700">
+              Selected: @{selectedUserObj.username}
             </p>
           )}
         </div>
@@ -138,17 +138,17 @@ export default function CreatePromiseForm({ users, currentUser }: CreatePromiseF
             onChange={(e) => setDescription(e.target.value)}
             placeholder="What are you promising?"
             rows={3}
-            className="w-full px-4 py-3 border-b-2 border-yellow-200 text-center focus:outline-none focus:border-yellow-400 transition bg-transparent resize-none font-serif text-lg"
+            className="w-full px-4 py-3 border border-stone-200 focus:outline-none focus:border-stone-400 transition bg-stone-50 resize-none font-serif text-lg"
           />
         </div>
 
         {/* Stake */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
+          <label className="block text-xs font-semibold text-stone-500 uppercase tracking-wide mb-2">
             Stake (trust)
           </label>
           <div className="flex items-center gap-3">
-              <input
+            <input
               type="range"
               min="1"
               max={Math.min(currentUser.trust, 50)}
@@ -162,20 +162,20 @@ export default function CreatePromiseForm({ users, currentUser }: CreatePromiseF
               max={currentUser.trust}
               value={stake}
               onChange={(e) => setStake(Math.max(1, Math.min(currentUser.trust, Number(e.target.value))))}
-              className="w-20 px-3 py-1 border border-amber-200 rounded-lg text-center focus:outline-none focus:ring-2 focus:ring-amber-300"
+              className="w-20 px-3 py-2 border border-stone-200 text-center focus:outline-none focus:border-stone-400 bg-stone-50"
             />
           </div>
-          <p className="mt-1 text-sm text-gray-500">
+          <p className="mt-2 text-sm text-stone-500">
             You will stake {stake} trust on this promise
           </p>
         </div>
 
         {/* Outcome Explanation */}
-        <div className="bg-amber-50 rounded-lg p-4 text-sm">
-          <p className="font-medium text-amber-800 mb-2">How it works:</p>
-          <ul className="space-y-1 text-amber-700">
-            <li>✅ <strong>Promise kept:</strong> You get stake back + 50% bonus ({stake + Math.floor(stake * 0.5)} trust), they get {Math.floor(stake * 0.5)} trust</li>
-            <li>💔 <strong>Promise broken:</strong> They get your stake ({stake} trust)</li>
+        <div className="bg-stone-50 border border-stone-200 p-4 text-sm">
+          <p className="font-medium text-stone-700 mb-2">How it works:</p>
+          <ul className="space-y-1 text-stone-600">
+            <li><strong>Promise kept:</strong> You get stake back + 50% bonus ({stake + Math.floor(stake * 0.5)} trust), they get {Math.floor(stake * 0.5)} trust</li>
+            <li><strong>Promise broken:</strong> They get your stake ({stake} trust)</li>
           </ul>
         </div>
 
@@ -183,7 +183,7 @@ export default function CreatePromiseForm({ users, currentUser }: CreatePromiseF
         <button
           type="submit"
           disabled={isPending || currentUser.trust < stake}
-          className="w-full bg-gradient-to-r from-amber-500 to-orange-500 text-white py-3 rounded-lg font-medium hover:from-amber-600 hover:to-orange-600 transition disabled:opacity-50 disabled:cursor-not-allowed"
+          className="w-full bg-green-100 border border-green-200 text-green-900 py-4 font-semibold uppercase tracking-wider hover:bg-green-200 transition disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {isPending ? 'Creating...' : `Create Promise (stake ${stake} trust)`}
         </button>
