@@ -1,13 +1,13 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    "./pages/**/*.{js,ts,jsx,tsx}",
-    "./components/**/*.{js,ts,jsx,tsx}",
+    "./app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./components/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
     fontFamily: {
-      "serif": "Lora",
-      "sans": "Quicksand"
+      "serif": ["Lora", "serif"],
+      "sans": ["Inter", "sans-serif"]
     },
     extend: {},
   },

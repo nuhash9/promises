@@ -1,0 +1,36 @@
+import Link from 'next/link';
+import { getCurrentUser } from '@/lib/actions';
+import LogoutButton from './LogoutButton';
+
+export default async function Header() {
+  const user = await getCurrentUser();
+
+  return (
+    <header className="bg-white/90 backdrop-blur-sm border-b border-stone-200 sticky top-0 z-50">
+      <div className="max-w-screen-md mx-auto px-6 py-4 flex justify-between items-center">
+        <Link href="/" className="text-xl font-serif font-bold text-green-900 tracking-tight">
+          Promises
+        </Link>
+
+        {user ? (
+          <div className="flex items-center gap-6">
+            <div className="text-right">
+              <p className="text-sm text-stone-600">@{user.username}</p>
+              <p className="text-sm font-semibold text-stone-700">
+                {user.trust} trust
+              </p>
+            </div>
+            <LogoutButton />
+          </div>
+        ) : (
+          <Link
+            href="/auth"
+            className="bg-green-100 border border-green-200 text-green-900 px-5 py-2 rounded-sm hover:bg-green-200 transition text-sm font-medium tracking-wide"
+          >
+            Sign in
+          </Link>
+        )}
+      </div>
+    </header>
+  );
+}
