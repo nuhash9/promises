@@ -13,8 +13,8 @@ export default async function Home() {
         <h1 className="text-6xl font-serif font-bold text-stone-900 mb-6 tracking-tight">
           Promises
         </h1>
-        <p className="text-xl text-stone-600 mb-10 max-w-lg mx-auto font-light leading-relaxed">
-          The currency of trust. Stake vows on your word.
+        <p className="text-xl text-gray-600 mb-8 max-w-md mx-auto">
+          Make promises that matter. Stake your trust, keep your word.
         </p>
         
         <Link
@@ -24,22 +24,25 @@ export default async function Home() {
           Get Started
         </Link>
 
-        <div className="mt-20 grid md:grid-cols-3 gap-px bg-stone-200 border border-stone-200">
-          <div className="bg-white p-10 text-center hover:bg-stone-50 transition">
-            <h3 className="font-serif font-bold text-stone-900 text-xl mb-3">Make Promises</h3>
-            <p className="text-stone-500 text-sm leading-relaxed">
-              Define your commitment. Stake your reputation.
+        <div className="mt-16 grid md:grid-cols-3 gap-6">
+          <div className="bg-white rounded-xl p-6 shadow-sm border border-amber-100">
+            <div className="text-3xl mb-3">🤝</div>
+            <h3 className="font-bold text-gray-900 mb-2">Make Promises</h3>
+            <p className="text-gray-600 text-sm">
+              Promise something to another user and stake trust to show you mean it.
             </p>
           </div>
-          <div className="bg-white p-10 text-center hover:bg-stone-50 transition">
-            <h3 className="font-serif font-bold text-stone-900 text-xl mb-3">Stake Vows</h3>
-            <p className="text-stone-500 text-sm leading-relaxed">
-              Put skin in the game. Mutual stakes ensure mutual respect.
+          <div className="bg-white rounded-xl p-6 shadow-sm border border-amber-100">
+            <div className="text-3xl mb-3">✨</div>
+            <h3 className="font-bold text-gray-900 mb-2">Stake Trust</h3>
+            <p className="text-gray-600 text-sm">
+              Put your trust on the line. Keep promises to earn bonus trust together.
             </p>
           </div>
-          <div className="bg-white p-10 text-center hover:bg-stone-50 transition">
-            <h3 className="font-serif font-bold text-stone-900 text-xl mb-3">Build Trust</h3>
-            <p className="text-stone-500 text-sm leading-relaxed">
+          <div className="bg-white rounded-xl p-6 shadow-sm border border-amber-100">
+            <div className="text-3xl mb-3">📊</div>
+            <h3 className="font-bold text-gray-900 mb-2">Build Trust</h3>
+            <p className="text-gray-600 text-sm">
               A transparent record of your integrity.
             </p>
           </div>
@@ -77,10 +80,10 @@ export default async function Home() {
   return (
     <>
       {/* Stats Bar */}
-      <div className="grid grid-cols-4 border border-stone-200 bg-stone-200 gap-px mb-12">
-        <div className="bg-white p-6 text-center">
-          <p className="text-3xl font-serif font-bold text-green-800">{user.vows}</p>
-          <p className="text-xs text-stone-500 uppercase tracking-widest mt-1">Vows</p>
+      <div className="grid grid-cols-4 gap-4 mb-8">
+        <div className="bg-white rounded-xl p-4 shadow-sm border border-amber-100 text-center">
+          <p className="text-2xl font-bold text-amber-600">✨ {user.trust}</p>
+          <p className="text-sm text-gray-500">Trust</p>
         </div>
         <div className="bg-white p-6 text-center">
           <p className="text-3xl font-serif font-bold text-green-800">{kept}</p>

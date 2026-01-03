@@ -15,9 +15,9 @@ export default async function Header() {
         {user ? (
           <div className="flex items-center gap-6">
             <div className="text-right">
-              <p className="text-xs text-stone-500 uppercase tracking-wide">@{user.username}</p>
-              <p className="text-sm font-medium text-green-800">
-                {user.vows} vows
+              <p className="text-sm text-gray-600">@{user.username}</p>
+              <p className="text-sm font-semibold text-amber-700">
+                ✨ {user.trust} trust
               </p>
             </div>
             <LogoutButton />

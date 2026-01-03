@@ -1,7 +1,7 @@
 export interface User {
   id: string;
   username: string;
-  vows: number; // currency
+  trust: number; // currency
   createdAt: number;
 }
 
