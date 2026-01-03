@@ -14,7 +14,7 @@ export default async function Home() {
           Promises
         </h1>
         <p className="text-xl text-gray-600 mb-8 max-w-md mx-auto">
-          Make promises that matter. Stake your vows, build trust, and keep your word.
+          Make promises that matter. Stake your trust, keep your word.
         </p>
         
         <Link
@@ -29,7 +29,7 @@ export default async function Home() {
             <div className="text-3xl mb-3">🤝</div>
             <h3 className="font-bold text-gray-900 mb-2">Make Promises</h3>
             <p className="text-gray-600 text-sm">
-              Promise something to another user and stake vows to show you mean it.
+              Promise something to another user and stake trust to show you mean it.
             </p>
           </div>
           <div className="bg-white rounded-xl p-6 shadow-sm border border-amber-100">

@@ -62,7 +62,7 @@ export default function AuthForm({ existingUsers }: AuthFormProps) {
       <p className="text-center text-gray-500 mb-6">
         {isLogin 
           ? 'Sign in to manage your promises' 
-          : 'Start with 100 vows to stake on promises'}
+          : 'Start with 100 trust to stake on promises'}
       </p>
 
       {error && (
