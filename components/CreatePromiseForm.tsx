@@ -189,7 +189,7 @@ export default function CreatePromiseForm({ users, currentUser }: CreatePromiseF
         <button
           type="submit"
           disabled={isPending || currentUser.vows < stake}
-          className="w-full bg-stone-900 text-white py-4 font-semibold uppercase tracking-wider hover:bg-stone-800 transition disabled:opacity-50 disabled:cursor-not-allowed text-sm"
+          className="w-full bg-amber-600 text-white py-4 font-semibold uppercase tracking-wider hover:bg-amber-700 transition disabled:opacity-50 disabled:cursor-not-allowed text-sm"
         >
           {isPending ? 'Creating...' : `Create Promise (stake ${stake} vows)`}
         </button>

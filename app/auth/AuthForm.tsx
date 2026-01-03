@@ -90,7 +90,7 @@ export default function AuthForm({ existingUsers }: AuthFormProps) {
         <button
           type="submit"
           disabled={isPending}
-          className="w-full bg-stone-900 text-white py-4 font-semibold uppercase tracking-wider hover:bg-stone-800 transition disabled:opacity-50"
+          className="w-full bg-amber-600 text-white py-4 font-semibold uppercase tracking-wider hover:bg-amber-700 transition disabled:opacity-50"
         >
           {isPending ? 'Please wait...' : (isLogin ? 'Sign In' : 'Create Account')}
         </button>

@@ -85,7 +85,7 @@ export default function PromiseCard({ promise, promiser, promisee, currentUserId
             <button
               onClick={handleAccept}
               disabled={isPending}
-              className="bg-stone-900 text-white px-4 py-2 text-xs uppercase tracking-wider font-semibold hover:bg-stone-800 transition disabled:opacity-50"
+              className="bg-amber-600 text-white px-4 py-2 text-xs uppercase tracking-wider font-semibold hover:bg-amber-700 transition disabled:opacity-50"
             >
               Accept
             </button>
@@ -106,7 +106,7 @@ export default function PromiseCard({ promise, promiser, promisee, currentUserId
               <button
                 onClick={() => handleResolve(true)}
                 disabled={isPending}
-                className="bg-stone-900 text-white px-4 py-2 text-xs uppercase tracking-wider font-semibold hover:bg-stone-800 transition disabled:opacity-50"
+                className="bg-amber-600 text-white px-4 py-2 text-xs uppercase tracking-wider font-semibold hover:bg-amber-700 transition disabled:opacity-50"
               >
                 Mark Kept
               </button>
