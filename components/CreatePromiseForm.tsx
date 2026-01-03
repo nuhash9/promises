@@ -96,7 +96,7 @@ export default function CreatePromiseForm({ users, currentUser }: CreatePromiseF
             }}
             onFocus={() => setShowResults(true)}
             placeholder="Search for a user..."
-            className="w-full px-4 py-3 border border-stone-200 focus:outline-none focus:border-stone-500 focus:ring-1 focus:ring-stone-500 transition bg-stone-50"
+            className="w-full px-4 py-3 border-b-2 border-yellow-200 text-center focus:outline-none focus:border-yellow-400 transition bg-transparent"
           />
           
           {showResults && searchTerm && filteredUsers.length > 0 && (
@@ -138,7 +138,7 @@ export default function CreatePromiseForm({ users, currentUser }: CreatePromiseF
             onChange={(e) => setDescription(e.target.value)}
             placeholder="What are you promising?"
             rows={3}
-            className="w-full px-4 py-3 border border-stone-200 focus:outline-none focus:border-stone-500 focus:ring-1 focus:ring-stone-500 transition bg-stone-50 resize-none font-serif text-lg"
+            className="w-full px-4 py-3 border-b-2 border-yellow-200 text-center focus:outline-none focus:border-yellow-400 transition bg-transparent resize-none font-serif text-lg"
           />
         </div>
 
@@ -189,7 +189,7 @@ export default function CreatePromiseForm({ users, currentUser }: CreatePromiseF
         <button
           type="submit"
           disabled={isPending || currentUser.vows < stake}
-          className="w-full bg-amber-600 text-white py-4 font-semibold uppercase tracking-wider hover:bg-amber-700 transition disabled:opacity-50 disabled:cursor-not-allowed text-sm"
+          className="w-full bg-green-100 border border-green-200 text-green-900 py-4 font-semibold uppercase tracking-wider hover:bg-green-200 transition disabled:opacity-50 disabled:cursor-not-allowed text-sm"
         >
           {isPending ? 'Creating...' : `Create Promise (stake ${stake} vows)`}
         </button>

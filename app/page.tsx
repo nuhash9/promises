@@ -19,7 +19,7 @@ export default async function Home() {
         
         <Link
           href="/auth"
-          className="inline-block bg-amber-600 text-white px-10 py-4 font-semibold uppercase tracking-widest hover:bg-amber-700 transition"
+          className="inline-block bg-green-100 border border-green-200 text-green-900 px-10 py-4 font-semibold uppercase tracking-widest hover:bg-green-200 transition"
         >
           Get Started
         </Link>
@@ -79,19 +79,19 @@ export default async function Home() {
       {/* Stats Bar */}
       <div className="grid grid-cols-4 border border-stone-200 bg-stone-200 gap-px mb-12">
         <div className="bg-white p-6 text-center">
-          <p className="text-3xl font-serif font-bold text-amber-600">{user.vows}</p>
+          <p className="text-3xl font-serif font-bold text-green-800">{user.vows}</p>
           <p className="text-xs text-stone-500 uppercase tracking-widest mt-1">Vows</p>
         </div>
         <div className="bg-white p-6 text-center">
-          <p className="text-3xl font-serif font-bold text-amber-600">{kept}</p>
+          <p className="text-3xl font-serif font-bold text-green-800">{kept}</p>
           <p className="text-xs text-stone-500 uppercase tracking-widest mt-1">Kept</p>
         </div>
         <div className="bg-white p-6 text-center">
-          <p className="text-3xl font-serif font-bold text-amber-600">{broken}</p>
+          <p className="text-3xl font-serif font-bold text-green-800">{broken}</p>
           <p className="text-xs text-stone-500 uppercase tracking-widest mt-1">Broken</p>
         </div>
         <div className="bg-white p-6 text-center">
-          <p className="text-3xl font-serif font-bold text-amber-600">{trustScore}%</p>
+          <p className="text-3xl font-serif font-bold text-green-800">{trustScore}%</p>
           <p className="text-xs text-stone-500 uppercase tracking-widest mt-1">Trust Score</p>
         </div>
       </div>
@@ -105,7 +105,7 @@ export default async function Home() {
       {incoming.length > 0 && (
         <div className="mb-12">
           <div className="flex items-center gap-3 mb-6">
-            <span className="h-2 w-2 rounded-full bg-amber-600"></span>
+            <span className="h-2 w-2 rounded-full bg-green-600"></span>
             <h2 className="text-xl font-serif font-bold text-stone-900">Needs Response</h2>
           </div>
           <PromiseList
