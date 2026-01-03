@@ -4,9 +4,9 @@ import { User, Promise, AppState } from '../types';
 // This persists across requests during server runtime
 
 const defaultUsers: User[] = [
-  { id: '1', username: 'alice', vows: 100, createdAt: Date.now() - 86400000 },
-  { id: '2', username: 'bob', vows: 100, createdAt: Date.now() - 86400000 },
-  { id: '3', username: 'charlie', vows: 100, createdAt: Date.now() - 86400000 },
+  { id: '1', username: 'alice', trust: 100, createdAt: Date.now() - 86400000 },
+  { id: '2', username: 'bob', trust: 100, createdAt: Date.now() - 86400000 },
+  { id: '3', username: 'charlie', trust: 100, createdAt: Date.now() - 86400000 },
 ];
 
 // Global store that persists in server memory
@@ -47,18 +47,18 @@ export function createUser(username: string): User {
   const newUser: User = {
     id: generateId(),
     username: username.toLowerCase(),
-    vows: 100,
+    trust: 100,
     createdAt: Date.now(),
   };
   store.users.push(newUser);
   return newUser;
 }
 
-export function updateUserVows(userId: string, vows: number): void {
+export function updateUserTrust(userId: string, trust: number): void {
   const store = getStore();
   const user = store.users.find(u => u.id === userId);
   if (user) {
-    user.vows = vows;
+    user.trust = trust;
   }
 }
 
@@ -85,10 +85,10 @@ export function createPromise(
 ): Promise {
   const store = getStore();
   
-  // Deduct stake from promiser
+  // Deduct stake from promiser (asymmetric - only promiser stakes)
   const promiser = store.users.find(u => u.id === promiserId);
   if (promiser) {
-    promiser.vows -= stake;
+    promiser.trust -= stake;
   }
   
   const newPromise: Promise = {
@@ -113,12 +113,7 @@ export function acceptPromise(promiseId: string, userId: string): Promise | null
     return null;
   }
   
-  // Deduct stake from promisee
-  const promisee = store.users.find(u => u.id === userId);
-  if (promisee) {
-    promisee.vows -= promise.stake;
-  }
-  
+  // Asymmetric staking: promisee doesn't need to stake anything
   promise.status = 'accepted';
   return promise;
 }
@@ -131,13 +126,33 @@ export function declinePromise(promiseId: string, userId: string): Promise | nul
     return null;
   }
   
-  // Refund promiser
+  // Refund promiser their stake
   const promiser = store.users.find(u => u.id === promise.promiserId);
   if (promiser) {
-    promiser.vows += promise.stake;
+    promiser.trust += promise.stake;
   }
   
   promise.status = 'declined';
+  promise.resolvedAt = Date.now();
+  return promise;
+}
+
+export function cancelPromise(promiseId: string, userId: string): Promise | null {
+  const store = getStore();
+  const promise = store.promises.find(p => p.id === promiseId);
+  
+  // Only the promiser can cancel, and only if still pending
+  if (!promise || promise.promiserId !== userId || promise.status !== 'pending') {
+    return null;
+  }
+  
+  // Refund promiser their stake
+  const promiser = store.users.find(u => u.id === userId);
+  if (promiser) {
+    promiser.trust += promise.stake;
+  }
+  
+  promise.status = 'declined'; // Reuse 'declined' status for cancelled
   promise.resolvedAt = Date.now();
   return promise;
 }
@@ -154,14 +169,14 @@ export function resolvePromise(promiseId: string, userId: string, kept: boolean)
   const promisee = store.users.find(u => u.id === promise.promiseeId);
   
   if (kept) {
-    // Both get stake back + 50% bonus
+    // Asymmetric payout: promiser gets stake back + 50% bonus, promisee gets 50% bonus
     const bonus = Math.floor(promise.stake * 0.5);
-    if (promiser) promiser.vows += promise.stake + bonus;
-    if (promisee) promisee.vows += promise.stake + bonus;
+    if (promiser) promiser.trust += promise.stake + bonus;
+    if (promisee) promisee.trust += bonus;
     promise.status = 'kept';
   } else {
-    // Promisee gets entire pot
-    if (promisee) promisee.vows += promise.stake * 2;
+    // Promisee gets the entire stake
+    if (promisee) promisee.trust += promise.stake;
     promise.status = 'broken';
   }
   

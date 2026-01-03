@@ -34,9 +34,9 @@ export default async function Home() {
           </div>
           <div className="bg-white rounded-xl p-6 shadow-sm border border-amber-100">
             <div className="text-3xl mb-3">✨</div>
-            <h3 className="font-bold text-gray-900 mb-2">Stake Vows</h3>
+            <h3 className="font-bold text-gray-900 mb-2">Stake Trust</h3>
             <p className="text-gray-600 text-sm">
-              Both parties stake vows. Keep promises to earn bonus vows together.
+              Put your trust on the line. Keep promises to earn bonus trust together.
             </p>
           </div>
           <div className="bg-white rounded-xl p-6 shadow-sm border border-amber-100">
@@ -82,8 +82,8 @@ export default async function Home() {
       {/* Stats Bar */}
       <div className="grid grid-cols-4 gap-4 mb-8">
         <div className="bg-white rounded-xl p-4 shadow-sm border border-amber-100 text-center">
-          <p className="text-2xl font-bold text-amber-600">✨ {user.vows}</p>
-          <p className="text-sm text-gray-500">Vows</p>
+          <p className="text-2xl font-bold text-amber-600">✨ {user.trust}</p>
+          <p className="text-sm text-gray-500">Trust</p>
         </div>
         <div className="bg-white rounded-xl p-4 shadow-sm border border-amber-100 text-center">
           <p className="text-2xl font-bold text-green-600">{kept}</p>

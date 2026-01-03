@@ -17,7 +17,7 @@ export default async function Header() {
             <div className="text-right">
               <p className="text-sm text-gray-600">@{user.username}</p>
               <p className="text-sm font-semibold text-amber-700">
-                ✨ {user.vows} vows
+                ✨ {user.trust} trust
               </p>
             </div>
             <LogoutButton />

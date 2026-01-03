@@ -11,6 +11,7 @@ import {
   createPromise as createPromiseInStore,
   acceptPromise as acceptPromiseInStore,
   declinePromise as declinePromiseInStore,
+  cancelPromise as cancelPromiseInStore,
   resolvePromise as resolvePromiseInStore,
 } from './store';
 
@@ -100,16 +101,20 @@ export async function createPromise(
     return { success: false, error: 'Not authenticated' };
   }
   
+  if (promiseeId === user.id) {
+    return { success: false, error: 'You cannot make a promise to yourself' };
+  }
+  
   if (!description.trim()) {
     return { success: false, error: 'Please enter what you\'re promising' };
   }
   
   if (stake < 1) {
-    return { success: false, error: 'Stake must be at least 1 vow' };
+    return { success: false, error: 'Stake must be at least 1 trust' };
   }
   
-  if (user.vows < stake) {
-    return { success: false, error: 'You don\'t have enough vows' };
+  if (user.trust < stake) {
+    return { success: false, error: 'You don\'t have enough trust' };
   }
   
   createPromiseInStore(user.id, promiseeId, description.trim(), stake);
@@ -146,6 +151,23 @@ export async function declinePromise(promiseId: string): Promise<{ success: bool
   
   if (!result) {
     return { success: false, error: 'Cannot decline this promise' };
+  }
+  
+  revalidatePath('/');
+  return { success: true };
+}
+
+export async function cancelPromise(promiseId: string): Promise<{ success: boolean; error?: string }> {
+  const user = await getCurrentUser();
+  
+  if (!user) {
+    return { success: false, error: 'Not authenticated' };
+  }
+  
+  const result = cancelPromiseInStore(promiseId, user.id);
+  
+  if (!result) {
+    return { success: false, error: 'Cannot cancel this promise' };
   }
   
   revalidatePath('/');

@@ -1,8 +1,8 @@
 'use client';
 
-import { useTransition } from 'react';
+import { useState, useTransition } from 'react';
 import { Promise, User } from '@/types';
-import { acceptPromise, declinePromise, resolvePromise } from '@/lib/actions';
+import { acceptPromise, declinePromise, cancelPromise, resolvePromise } from '@/lib/actions';
 
 interface PromiseCardProps {
   promise: Promise;
@@ -13,6 +13,7 @@ interface PromiseCardProps {
 
 export default function PromiseCard({ promise, promiser, promisee, currentUserId }: PromiseCardProps) {
   const [isPending, startTransition] = useTransition();
+  const [error, setError] = useState('');
   
   const isPromiser = currentUserId === promise.promiserId;
   const isPromisee = currentUserId === promise.promiseeId;
@@ -35,23 +36,46 @@ export default function PromiseCard({ promise, promiser, promisee, currentUserId
 
   const canAccept = isPromisee && promise.status === 'pending';
   const canDecline = isPromisee && promise.status === 'pending';
+  const canCancel = isPromiser && promise.status === 'pending';
   const canResolve = isPromisee && promise.status === 'accepted';
 
   const handleAccept = () => {
+    setError('');
     startTransition(async () => {
-      await acceptPromise(promise.id);
+      const result = await acceptPromise(promise.id);
+      if (!result.success) {
+        setError(result.error || 'Failed to accept promise');
+      }
     });
   };
 
   const handleDecline = () => {
+    setError('');
     startTransition(async () => {
-      await declinePromise(promise.id);
+      const result = await declinePromise(promise.id);
+      if (!result.success) {
+        setError(result.error || 'Failed to decline promise');
+      }
+    });
+  };
+
+  const handleCancel = () => {
+    setError('');
+    startTransition(async () => {
+      const result = await cancelPromise(promise.id);
+      if (!result.success) {
+        setError(result.error || 'Failed to cancel promise');
+      }
     });
   };
 
   const handleResolve = (kept: boolean) => {
+    setError('');
     startTransition(async () => {
-      await resolvePromise(promise.id, kept);
+      const result = await resolvePromise(promise.id, kept);
+      if (!result.success) {
+        setError(result.error || 'Failed to resolve promise');
+      }
     });
   };
 
@@ -74,9 +98,15 @@ export default function PromiseCard({ promise, promiser, promisee, currentUserId
         &ldquo;{promise.description}&rdquo;
       </p>
 
+      {error && (
+        <div className="mb-3 p-2 bg-red-50 border border-red-200 rounded-lg text-red-700 text-sm">
+          {error}
+        </div>
+      )}
+
       <div className="flex justify-between items-center">
         <div className="text-sm text-gray-500">
-          <span className="font-medium text-amber-600">✨ {promise.stake} vows</span> at stake each
+          <span className="font-medium text-amber-600">✨ {promise.stake} trust</span> at stake
         </div>
 
         <div className="flex gap-2">
@@ -119,8 +149,14 @@ export default function PromiseCard({ promise, promiser, promisee, currentUserId
             </>
           )}
 
-          {promise.status === 'pending' && isPromiser && (
-            <span className="text-sm text-gray-400 italic">Waiting for response...</span>
+          {canCancel && (
+            <button
+              onClick={handleCancel}
+              disabled={isPending}
+              className="bg-gray-200 text-gray-700 px-3 py-1.5 rounded-lg text-sm font-medium hover:bg-gray-300 transition disabled:opacity-50"
+            >
+              Cancel
+            </button>
           )}
 
           {promise.status === 'accepted' && isPromiser && (
@@ -131,13 +167,13 @@ export default function PromiseCard({ promise, promiser, promisee, currentUserId
 
       {promise.status === 'kept' && (
         <div className="mt-3 text-sm text-green-600 bg-green-50 rounded-lg p-2">
-          🎉 Both parties received their stake back + 50% bonus!
+          🎉 {isPromiser ? 'You got your stake back + 50% bonus!' : 'You earned a 50% bonus for their kept promise!'}
         </div>
       )}
 
       {promise.status === 'broken' && (
         <div className="mt-3 text-sm text-red-600 bg-red-50 rounded-lg p-2">
-          {isPromisee ? '💰 You received the entire pot!' : '😔 The promisee received the entire pot.'}
+          {isPromisee ? '💰 You received their stake!' : '😔 They received your stake.'}
         </div>
       )}
     </div>

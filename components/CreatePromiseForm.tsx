@@ -41,12 +41,12 @@ export default function CreatePromiseForm({ users, currentUser }: CreatePromiseF
     }
 
     if (stake < 1) {
-      setError('Stake must be at least 1 vow');
+      setError('Stake must be at least 1 trust');
       return;
     }
 
-    if (currentUser.vows < stake) {
-      setError('You don\'t have enough vows');
+    if (currentUser.trust < stake) {
+      setError('You don\'t have enough trust');
       return;
     }
 
@@ -109,7 +109,7 @@ export default function CreatePromiseForm({ users, currentUser }: CreatePromiseF
                   className="w-full px-4 py-2 text-left hover:bg-amber-50 flex justify-between items-center"
                 >
                   <span className="font-medium">@{user.username}</span>
-                  <span className="text-sm text-gray-500">✨ {user.vows} vows</span>
+                  <span className="text-sm text-gray-500">✨ {user.trust} trust</span>
                 </button>
               ))}
             </div>
@@ -145,13 +145,13 @@ export default function CreatePromiseForm({ users, currentUser }: CreatePromiseF
         {/* Stake */}
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">
-            Stake (vows)
+            Stake (trust)
           </label>
           <div className="flex items-center gap-3">
-            <input
+              <input
               type="range"
               min="1"
-              max={Math.min(currentUser.vows, 50)}
+              max={Math.min(currentUser.trust, 50)}
               value={stake}
               onChange={(e) => setStake(Number(e.target.value))}
               className="flex-1 h-2 bg-amber-200 rounded-lg appearance-none cursor-pointer"
@@ -159,14 +159,14 @@ export default function CreatePromiseForm({ users, currentUser }: CreatePromiseF
             <input
               type="number"
               min="1"
-              max={currentUser.vows}
+              max={currentUser.trust}
               value={stake}
-              onChange={(e) => setStake(Math.max(1, Math.min(currentUser.vows, Number(e.target.value))))}
+              onChange={(e) => setStake(Math.max(1, Math.min(currentUser.trust, Number(e.target.value))))}
               className="w-20 px-3 py-1 border border-amber-200 rounded-lg text-center focus:outline-none focus:ring-2 focus:ring-amber-300"
             />
           </div>
           <p className="mt-1 text-sm text-gray-500">
-            Both you and @{selectedUserObj?.username || '...'} will stake {stake} vows each
+            You will stake {stake} trust on this promise
           </p>
         </div>
 
@@ -174,18 +174,18 @@ export default function CreatePromiseForm({ users, currentUser }: CreatePromiseF
         <div className="bg-amber-50 rounded-lg p-4 text-sm">
           <p className="font-medium text-amber-800 mb-2">How it works:</p>
           <ul className="space-y-1 text-amber-700">
-            <li>✅ <strong>Promise kept:</strong> Both get stake back + 50% bonus ({stake + Math.floor(stake * 0.5)} vows each)</li>
-            <li>💔 <strong>Promise broken:</strong> Promisee gets entire pot ({stake * 2} vows)</li>
+            <li>✅ <strong>Promise kept:</strong> You get stake back + 50% bonus ({stake + Math.floor(stake * 0.5)} trust), they get {Math.floor(stake * 0.5)} trust</li>
+            <li>💔 <strong>Promise broken:</strong> They get your stake ({stake} trust)</li>
           </ul>
         </div>
 
         {/* Submit */}
         <button
           type="submit"
-          disabled={isPending || currentUser.vows < stake}
+          disabled={isPending || currentUser.trust < stake}
           className="w-full bg-gradient-to-r from-amber-500 to-orange-500 text-white py-3 rounded-lg font-medium hover:from-amber-600 hover:to-orange-600 transition disabled:opacity-50 disabled:cursor-not-allowed"
         >
-          {isPending ? 'Creating...' : `Create Promise (stake ${stake} vows)`}
+          {isPending ? 'Creating...' : `Create Promise (stake ${stake} trust)`}
         </button>
       </div>
     </form>
